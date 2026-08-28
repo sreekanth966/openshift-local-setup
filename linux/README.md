@@ -26,13 +26,15 @@ On Ubuntu/Debian, install the required virtualization packages:
 
 ```bash
 sudo apt update
-sudo apt install -y qemu-kvm libvirt-daemon libvirt-daemon-system libvirt-clients
+sudo apt install -y qemu-system-x86 libvirt-daemon libvirt-daemon-system libvirt-clients
 ```
 
 Verify again:
 
 ```bash
-lsmod | grep kvm
+sudo usermod -aG kvm,libvirt $USER
+sudo systemctl enable --now libvirtd
+virsh list --all
 ```
 
 Make sure your user has the required KVM/libvirt permissions.
